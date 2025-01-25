@@ -3,11 +3,24 @@ const app = express();
 
 app.get('/assistant/greet', (req, res) => {
     const name = req.query.name || 'Guest';
-    const welcomeMessage = `Hello, ${name}! Welcome to our assistant app!`;
-    const dayMessage = "Have a wonderful day!";
+    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const currentDay = daysOfWeek[new Date().getDay()];
+
+    let dayMessage;
+    switch (currentDay) {
+        case 'Monday':
+            dayMessage = "Happy Monday! Start your week with energy!";
+            break;
+        case 'Friday':
+            dayMessage = "It's Friday! The weekend is near!";
+            break;
+        default:
+            dayMessage = "Have a wonderful day!";
+            break;
+    }
 
     const response = {
-        welcomeMessage: welcomeMessage,
+        welcomeMessage: `Hello, ${name}! Welcome to our assistant app!`,
         dayMessage: dayMessage,
     };
 
